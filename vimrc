@@ -33,7 +33,8 @@ set hidden                          " enable multiple modified buffers
 set history=100                     " record recent used command history
 set autoread                        " auto read file that has been changed on disk
 set backspace=indent,eol,start      " backspace can delete everything
-set completeopt=menuone,longest     " complete options (insert)
+"set completeopt=menuone,longest     " complete options (insert)
+set completeopt=preview,menu
 set pumheight=10                    " complete popup height
 set scrolloff=5                     " minimal number of screen lines to keep beyond the cursor
 set autoindent                      " automatically indent new line
@@ -77,7 +78,7 @@ endif
 
 " vim-go
 "syntax enable  
-"filetype plugin on  
+filetype plugin on  
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -95,6 +96,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'morhetz/gruvbox'
 Plugin 'winmanager'
 Plugin 'taglist.vim'
+Plugin 'OmniCppComplete'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -151,6 +153,19 @@ autocmd BufReadPost *
     \     exe "normal g'\"" |
     \ endif
 "}}}
+
+" OmniCppComplete
+let OmniCpp_NamespaceSearch = 1
+let OmniCpp_GlobalScopeSearch = 1
+let OmniCpp_ShowAccess = 1
+let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" automatically open and close the popup menu / preview window
+au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+set completeopt=menuone,menu,longest,preview
 
 " Key Bindings: {{{
 let mapleader = ","
