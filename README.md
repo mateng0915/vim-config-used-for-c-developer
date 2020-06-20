@@ -13,4 +13,3 @@ vim ~/.vimrc
 PluginInstall
 BundleInstall
 
-Screen Shot 2020-06-20 at 3.29.39 PM
