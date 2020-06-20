@@ -40,8 +40,8 @@ set scrolloff=5                     " minimal number of screen lines to keep bey
 set autoindent                      " automatically indent new line
 set cinoptions=:0,l1,g0,t0,(0,(s    " C kind language indent options
 
-set tabstop=4                       " number of spaces in a tab 表示一个tab显示出来是多少个空格
-set softtabstop=4                   " insert and delete space of <tab> 在编辑的时候，一个tab是多少个空格
+set tabstop=2                       " number of spaces in a tab 表示一个tab显示出来是多少个空格
+set softtabstop=2                   " insert and delete space of <tab> 在编辑的时候，一个tab是多少个空格
 set shiftwidth=4                    " number of spaces for indent 每一级缩进是多少个空格
 set expandtab                       " expand tabs into spaces  将tab扩展成空格
 "set noexpandtab                     " noexpand tabs into spaces  将tab不扩展成空格
