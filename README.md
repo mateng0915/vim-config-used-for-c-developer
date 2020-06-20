@@ -15,4 +15,4 @@ BundleInstall
 
 ## Result
 
-![text] https://github.com/mateng0915/photo_library/blob/master/Screen%20Shot%202020-06-20%20at%203.29.39%20PM.png
+![](https://github.com/mateng0915/photo_library/blob/master/Screen%20Shot%202020-06-20%20at%203.29.39%20PM.png)
