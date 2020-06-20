@@ -10,8 +10,8 @@ If using macosx, the ctag can not support ctag -R, pls install new ctag
 
 vim ~/.vimrc
 
-PluginInstall
-BundleInstall
+1. PluginInstall
+2. BundleInstall
 
 ## Usage
 1. vim textfile
