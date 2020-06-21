@@ -42,7 +42,7 @@ set cinoptions=:0,l1,g0,t0,(0,(s    " C kind language indent options
 
 set tabstop=2                       " number of spaces in a tab 表示一个tab显示出来是多少个空格
 set softtabstop=2                   " insert and delete space of <tab> 在编辑的时候，一个tab是多少个空格
-set shiftwidth=4                    " number of spaces for indent 每一级缩进是多少个空格
+set shiftwidth=2                    " number of spaces for indent 每一级缩进是多少个空格
 set expandtab                       " expand tabs into spaces  将tab扩展成空格
 "set noexpandtab                     " noexpand tabs into spaces  将tab不扩展成空格
 set smarttab                        "根据文件中其他地方的缩进空格个数来确定一个tab是多少个空格
@@ -97,6 +97,8 @@ Plugin 'morhetz/gruvbox'
 Plugin 'winmanager'
 Plugin 'taglist.vim'
 Plugin 'OmniCppComplete'
+Plugin 'jlanzarotta/bufexplorer'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -273,6 +275,7 @@ nmap <Leader>F :NERDTreeFind<CR>
 " man.vim - view man page in VIM
 source $VIMRUNTIME/ftplugin/man.vim
 
+let g:winManagerWindowLayout='BufExplorer|FileExplorer'
 let g:winManagerWidth = 35
 nmap wm :WMToggle<CR>
 
