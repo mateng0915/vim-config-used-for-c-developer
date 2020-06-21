@@ -98,6 +98,8 @@ Plugin 'winmanager'
 Plugin 'taglist.vim'
 Plugin 'OmniCppComplete'
 Plugin 'jlanzarotta/bufexplorer'
+Plugin 'vim-scripts/ag.vim'
+Plugin 'mileszs/ack.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -219,6 +221,9 @@ nnoremap g#  g#z
 " Grep
 nnoremap <silent> <F3> :Grep<CR>
 nmap <leader>lv :lv /<c-r>=expand("<cword>")<cr>/ %<cr>:lw<cr>
+
+map <s-a> :Ack<space>
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 "}}}
 

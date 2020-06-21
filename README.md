@@ -6,6 +6,10 @@ Using this git's vim config setting our vim can become the good ide which used c
 ## MAC
 If using macosx, the ctag can not support ctag -R, pls install new ctag
 
+## Global Search plugin prepare
+1. Prepare the ag
+brew install the_silver_searcher
+
 ## Plugin Install
 
 vim ~/.vimrc
