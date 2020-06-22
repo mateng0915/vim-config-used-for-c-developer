@@ -89,19 +89,21 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'fatih/vim-go'
 Plugin 'dgryski/vim-godef'
-Plugin 'Blackrush/vim-gocode'
 Plugin 'majutsushi/tagbar'
 Plugin 'morhetz/gruvbox'
 Plugin 'winmanager'
 Plugin 'taglist.vim'
 Plugin 'OmniCppComplete'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'gregsexton/gitv'
 Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/ag.vim'
 Plugin 'mileszs/ack.vim'
+Plugin 'Shougo/neocomplete.vim'
 
 " All of your Plugins must be added before the following line
+"
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -158,6 +160,11 @@ autocmd BufReadPost *
     \ endif
 "}}}
 
+"gitgutter
+
+ nmap [c <Plug>(GitGutterPrevHunk)
+ nmap ]c <Plug>(GitGutterNextHunk)
+
 " OmniCppComplete
 let OmniCpp_NamespaceSearch = 1
 let OmniCpp_GlobalScopeSearch = 1
@@ -167,9 +174,12 @@ let OmniCpp_MayCompleteDot = 1 " autocomplete after .
 let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
 let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
 let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-" automatically open and close the popup menu / preview window
 au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
 set completeopt=menuone,menu,longest,preview
+
+" neocomplatecache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_auto_select = 1
 
 " Key Bindings: {{{
 let mapleader = ","
