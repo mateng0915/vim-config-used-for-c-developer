@@ -9,7 +9,7 @@ If using macosx, the ctag can not support ctag -R, pls install new ctag
 brew install vundle
 
 ## Global Search plugin prepare
-1. Prepare the ag
+1. Prepare the ag:
 brew install the_silver_searcher
 
 ## Plugin Install
