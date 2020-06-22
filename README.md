@@ -1,10 +1,12 @@
 # vim-config-used-for-c-developer
-This is vim config setting
-
-Using this git's vim config setting our vim can become the good ide which used c++ developer
+This is vim config setting for c++ developer
 
 ## MAC
 If using macosx, the ctag can not support ctag -R, pls install new ctag
+
+## Vundle install
+
+brew install vundle
 
 ## Global Search plugin prepare
 1. Prepare the ag
