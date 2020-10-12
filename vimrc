@@ -40,12 +40,12 @@ set scrolloff=5                     " minimal number of screen lines to keep bey
 set autoindent                      " automatically indent new line
 set cinoptions=:0,l1,g0,t0,(0,(s    " C kind language indent options
 
-set tabstop=2                       " number of spaces in a tab ��ʾһ��tab��ʾ�����Ƕ��ٸ��ո�
-set softtabstop=2                   " insert and delete space of <tab> �ڱ༭��ʱ��һ��tab�Ƕ��ٸ��ո�
-set shiftwidth=2                    " number of spaces for indent ÿһ�������Ƕ��ٸ��ո�
-set expandtab                       " expand tabs into spaces  ��tab��չ�ɿո�
-"set noexpandtab                     " noexpand tabs into spaces  ��tab����չ�ɿո�
-set smarttab                        "�����ļ��������ط��������ո������ȷ��һ��tab�Ƕ��ٸ��ո�
+set tabstop=2                       " number of spaces in a tab ±Ì æ“ª∏ˆtabœ‘ æ≥ˆ¿¥ «∂‡…Ÿ∏ˆø’∏Ò
+set softtabstop=2                   " insert and delete space of <tab> ‘⁄±‡º≠µƒ ±∫Ú£¨“ª∏ˆtab «∂‡…Ÿ∏ˆø’∏Ò
+set shiftwidth=2                    " number of spaces for indent √ø“ªº∂ÀıΩ¯ «∂‡…Ÿ∏ˆø’∏Ò
+set expandtab                       " expand tabs into spaces  Ω´tab¿©’π≥…ø’∏Ò
+"set noexpandtab                     " noexpand tabs into spaces  Ω´tab≤ª¿©’π≥…ø’∏Ò
+set smarttab                        "∏˘æ›Œƒº˛÷–∆‰À˚µÿ∑ΩµƒÀıΩ¯ø’∏Ò∏ˆ ˝¿¥»∑∂®“ª∏ˆtab «∂‡…Ÿ∏ˆø’∏Ò
 set incsearch                       " incremental search
 set hlsearch                        " highlight search match
 set ignorecase                      " do case insensitive matching
@@ -53,9 +53,9 @@ set smartcase                       " do not ignore if search pattern has CAPS
 set nobackup                        " do not create backup file
 set noswapfile                      " do not create swap file
 set backupcopy=yes                  " overwrite the original file
-set showmatch                       "����ƥ��ģʽ����ʾƥ�������
-set linebreak                       "���ʻ���
-set whichwrap=b,s,<,>,,]           "�������׺���ĩʱ����������һ��ȥ
+set showmatch                       "…Ë÷√∆•≈‰ƒ£ Ω£¨œ‘ æ∆•≈‰µƒ¿®∫≈
+set linebreak                       "’˚¥ ªª––
+set whichwrap=b,s,<,>,,]           "π‚±Í¥”–– ◊∫Õ––ƒ© ±ø…“‘Ã¯µΩ¡Ì“ª––»•
 
 set encoding=utf-8
 set termencoding=utf-8
@@ -89,7 +89,6 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'dgryski/vim-godef'
 Plugin 'majutsushi/tagbar'
 Plugin 'morhetz/gruvbox'
 Plugin 'winmanager'
@@ -101,15 +100,34 @@ Plugin 'jlanzarotta/bufexplorer'
 Plugin 'vim-scripts/ag.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'ludovicchabant/vim-gutentags'
 
 " All of your Plugins must be added before the following line
 "
 call vundle#end()            " required
 filetype plugin indent on    " required
-
 set background=dark
 let g:rehash256 = 1
 colorscheme gruvbox
+
+" gutentags搜索工程目錄的標誌，碰到這些文件/目錄名就停止向上一級目錄遞歸 "
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+" 所生成的數據文件的名稱 "
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 將自動生成的 tags 文件全部放入 ~/.cache/tags 目錄中，避免污染工程目錄 "
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+" 檢測 ~/.cache/tags 不存在就新建 "
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" 配置 ctags 的參數 "
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -267,7 +285,7 @@ nmap <Leader>t :TlistToggle<cr>
 " pydiction
 filetype plugin on  
 autocmd FileType python set omnifunc=pythoncomplete#Complete  
-autocmd FileType javascr��pt set omnifunc=javascriptcomplete#CompleteJS  
+autocmd FileType javascr®©pt set omnifunc=javascriptcomplete#CompleteJS  
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags  
 autocmd FileType css set omnifunc=csscomplete#CompleteCSS  
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags  
@@ -291,7 +309,7 @@ nmap <Leader>F :NERDTreeFind<CR>
 source $VIMRUNTIME/ftplugin/man.vim
 
 let g:winManagerWindowLayout='BufExplorer|FileExplorer'
-let g:winManagerWidth = 35
+let g:winManagerWidth = 40
 nmap wm :WMToggle<CR>
 
 nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+cdefgmnpstuv --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
@@ -329,7 +347,7 @@ endif
 "set pastetoggle=<F12>
 
 
-set t_CO=256 "�������ģ���ն���Ҫ����ɫ���ó�256ɫ
+set t_CO=256 "»Áπ˚ «‘⁄ƒ£ƒ‚÷’∂À–Ë“™∞——’…´…Ë÷√≥…256…´
 
 " vimgdb.vim
 if has("gdb")
@@ -337,3 +355,4 @@ if has("gdb")
 	let g:vimgdb_debug_file=""
 	run macros/gdb_mappings.vim
 endif
+
