@@ -101,6 +101,7 @@ Plugin 'vim-scripts/ag.vim'
 Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'ludovicchabant/vim-gutentags'
+Plugin 'vim-scripts/a.vim'
 
 " All of your Plugins must be added before the following line
 "
@@ -270,7 +271,7 @@ nmap <Leader>r :MRU<cr>
 
 " taglist
 let g:Tlist_Auto_Open = 0
-let g:Tlist_WinWidth = 40
+let g:Tlist_WinWidth = 35
 let g:Tlist_Use_Right_Window = 1
 let g:Tlist_Auto_Update = 1
 let g:Tlist_Process_File_Always = 1
@@ -297,7 +298,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " nerdtree
 " autocmd vimenter * NERDTree
 let g:NERDTreeWinPos = "left"
-let g:NERDTreeWinSize = 25
+let g:NERDTreeWinSize = 40
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 0
 let NERDTreeShowBookmarks=1
