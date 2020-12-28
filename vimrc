@@ -87,13 +87,26 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+set encoding=utf-8
+set pyxversion=3
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plugin 'Shougo/deoplete.nvim'
+  Plugin 'roxma/nvim-yarp'
+  Plugin 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
 " let Vundle manage Vundle, required
+Plugin 'Shougo/deoplete-clangx'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'morhetz/gruvbox'
 Plugin 'winmanager'
 Plugin 'taglist.vim'
-Plugin 'OmniCppComplete'
+" Plugin 'OmniCppComplete'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'gregsexton/gitv'
 Plugin 'jlanzarotta/bufexplorer'
@@ -102,6 +115,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'vim-scripts/a.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " All of your Plugins must be added before the following line
 "
@@ -110,6 +125,7 @@ filetype plugin indent on    " required
 set background=dark
 let g:rehash256 = 1
 colorscheme gruvbox
+set completeopt-=preview
 
 " gutentags搜索工程目錄的標誌，碰到這些文件/目錄名就停止向上一級目錄遞歸 "
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
@@ -171,6 +187,10 @@ let g:tagbar_type_go = {
     \ }
 
 nmap <F8> :TagbarToggle<CR>
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
 
 " Restore the last quit position when open file.
 autocmd BufReadPost *
