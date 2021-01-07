@@ -117,6 +117,7 @@ Plugin 'ludovicchabant/vim-gutentags'
 Plugin 'vim-scripts/a.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 "
@@ -318,20 +319,35 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " nerdtree
 " autocmd vimenter * NERDTree
 let g:NERDTreeWinPos = "left"
-let g:NERDTreeWinSize = 40
+let g:NERDTreeWinSize = 30
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 0
 let NERDTreeShowBookmarks=1
 let NERDChristmasTree=1
+"let NERDTreeMinimalUI=1
 nmap nr :NERDTreeToggle<CR>
 nmap <Leader>F :NERDTreeFind<CR>
 
 " man.vim - view man page in VIM
 source $VIMRUNTIME/ftplugin/man.vim
 
-let g:winManagerWindowLayout='BufExplorer|FileExplorer'
+" WinManager设置
+" NERD_Tree集成到WinManager
+let g:NERDTree_title="[NERDTree]"
+function! NERDTree_Start()
+  exec 'NERDTree'
+endfunction
+
+function! NERDTree_IsValid()
+  return 1
+endfunction
+
+nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><C
+
 let g:winManagerWidth = 40
-nmap wm :WMToggle<CR>
+let g:winManagerWindowLayout='NERDTree|BufExplorer'
+
+" nmap wm :WMToggle<CR>
 
 nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+cdefgmnpstuv --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
 "nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
