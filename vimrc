@@ -40,9 +40,9 @@ set scrolloff=5                     " minimal number of screen lines to keep bey
 set autoindent                      " automatically indent new line
 set cinoptions=:0,l1,g0,t0,(0,(s    " C kind language indent options
 
-set tabstop=2                       " number of spaces in a tab ±Ì æ“ª∏ˆtabœ‘ æ≥ˆ¿¥ «∂‡…Ÿ∏ˆø’∏Ò
-set softtabstop=2                   " insert and delete space of <tab> ‘⁄±‡º≠µƒ ±∫Ú£¨“ª∏ˆtab «∂‡…Ÿ∏ˆø’∏Ò
-set shiftwidth=2                    " number of spaces for indent √ø“ªº∂ÀıΩ¯ «∂‡…Ÿ∏ˆø’∏Ò
+set tabstop=4                       " number of spaces in a tab ±Ì æ“ª∏ˆtabœ‘ æ≥ˆ¿¥ «∂‡…Ÿ∏ˆø’∏Ò
+set softtabstop=4                   " insert and delete space of <tab> ‘⁄±‡º≠µƒ ±∫Ú£¨“ª∏ˆtab «∂‡…Ÿ∏ˆø’∏Ò
+set shiftwidth=4                    " number of spaces for indent √ø“ªº∂ÀıΩ¯ «∂‡…Ÿ∏ˆø’∏Ò
 set expandtab                       " expand tabs into spaces  Ω´tab¿©’π≥…ø’∏Ò
 "set noexpandtab                     " noexpand tabs into spaces  Ω´tab≤ª¿©’π≥…ø’∏Ò
 set smarttab                        "∏˘æ›Œƒº˛÷–∆‰À˚µÿ∑ΩµƒÀıΩ¯ø’∏Ò∏ˆ ˝¿¥»∑∂®“ª∏ˆtab «∂‡…Ÿ∏ˆø’∏Ò
@@ -319,7 +319,7 @@ autocmd FileType c set omnifunc=ccomplete#Complete
 " nerdtree
 " autocmd vimenter * NERDTree
 let g:NERDTreeWinPos = "left"
-let g:NERDTreeWinSize = 30
+let g:NERDTreeWinSize = 40
 let g:NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 0
 let NERDTreeShowBookmarks=1
@@ -346,6 +346,7 @@ nmap wm :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<C
 
 let g:winManagerWidth = 40
 let g:winManagerWindowLayout='NERDTree|BufExplorer'
+
 
 " nmap wm :WMToggle<CR>
 
