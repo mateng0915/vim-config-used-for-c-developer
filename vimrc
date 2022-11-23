@@ -1,6 +1,3 @@
-" Vim config file.
-
-" Global Settings: {{{
 if has("syntax")
     syntax on                       " highlight syntax
 endif
@@ -62,6 +59,9 @@ set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,gb2312,gbk,gb18030
 set fileformat=unix
+set cursorcolumn
+
+" set tags=./tags,tags;$HOME
 
 " gui settings
 if has("gui_running")
@@ -77,8 +77,8 @@ if has("gui_running")
 endif
 
 " vim-go
-"syntax enable  
-filetype plugin on  
+"syntax enable
+filetype plugin on
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -91,7 +91,7 @@ set encoding=utf-8
 set pyxversion=3
 
 if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plugin 'Shougo/deoplete.nvim'
   Plugin 'roxma/nvim-yarp'
@@ -118,7 +118,6 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-
 " All of your Plugins must be added before the following line
 "
 call vundle#end()            " required
@@ -131,6 +130,7 @@ set completeopt-=preview
 " gutentags搜索工程目錄的標誌，碰到這些文件/目錄名就停止向上一級目錄遞歸 "
 let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
 
+let g:clap_theme = 'gruvbox'
 " 所生成的數據文件的名稱 "
 let g:gutentags_ctags_tagfile = '.tags'
 
@@ -198,33 +198,46 @@ autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \     exe "normal g'\"" |
     \ endif
-"}}}
-
-"gitgutter
-
- nmap [c <Plug>(GitGutterPrevHunk)
- nmap ]c <Plug>(GitGutterNextHunk)
-
-" OmniCppComplete
-let OmniCpp_NamespaceSearch = 1
-let OmniCpp_GlobalScopeSearch = 1
-let OmniCpp_ShowAccess = 1
-let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
-let OmniCpp_MayCompleteDot = 1 " autocomplete after .
-let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
-let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
-let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
-au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-set completeopt=menuone,menu,longest,preview
+" }}}
 
 " neocomplatecache
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_auto_select = 1
 
+" nmap wm :WMToggle<CR>
+
+nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+cdefgmnpstuv --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
+"nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
+nmap <F10> :!cscope -Rbkq<cr><cr>
+set tags=./tags
+autocmd FileType c set tags+=/usr/include/tags
+"set autochdir
+
+" cscope
+nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
+nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
+nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
+
+if has("cscope")
+    set cscopetag
+    set csto=1
+    set cst
+    set nocsverb
+    set cscopequickfix=s-,c-,d-,i-,t-,e-,f-
+    if filereadable("cscope.out")
+        cs add cscope.out
+    endif
+    set csverb
+endif
+
 " Key Bindings: {{{
 let mapleader = ","
 let maplocalleader = "\\"
-
 " map : -> <space>
 map <Space> :
 
@@ -305,16 +318,16 @@ nmap tg :Tlist<CR>
 nmap <Leader>t :TlistToggle<cr>
 
 " pydiction
-filetype plugin on  
-autocmd FileType python set omnifunc=pythoncomplete#Complete  
-autocmd FileType javascr®©pt set omnifunc=javascriptcomplete#CompleteJS  
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags  
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS  
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags  
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP  
-autocmd FileType c set omnifunc=ccomplete#Complete  
-   
-" let g:pydiction_location='~/.vim/tools/pydiction/complete-dict'  
+filetype plugin on
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascr®©pt set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+
+" let g:pydiction_location='~/.vim/tools/pydiction/complete-dict'
 
 " nerdtree
 " autocmd vimenter * NERDTree
@@ -348,36 +361,6 @@ let g:winManagerWidth = 40
 let g:winManagerWindowLayout='NERDTree|BufExplorer'
 
 
-" nmap wm :WMToggle<CR>
-
-nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+cdefgmnpstuv --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
-"nmap <F9> :!ctags -R --c-kinds=+cdefgmnpstuv --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR>:TlistUpdate<CR>
-nmap <F10> :!cscope -Rbkq<cr><cr>
-set tags=./tags
-autocmd FileType c set tags+=/usr/include/tags
-"set autochdir
-
-" cscope
-nmap <leader>ss :cs find s <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sg :cs find g <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sc :cs find c <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>st :cs find t <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>se :cs find e <C-R>=expand("<cword>")<cr><cr>
-nmap <leader>sf :cs find f <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>si :cs find i <C-R>=expand("<cfile>")<cr><cr>
-nmap <leader>sd :cs find d <C-R>=expand("<cword>")<cr><cr>
-
-if has("cscope")
-    set cscopetag
-    set csto=1
-    set cst
-    set nocsverb
-    set cscopequickfix=s-,c-,d-,i-,t-,e-,f-
-    if filereadable("cscope.out")
-        cs add cscope.out
-    endif
-    set csverb
-endif
 
 "paste
 "vmap <C-c> "+y
@@ -386,6 +369,23 @@ endif
 
 
 set t_CO=256 "»Áπ˚ «‘⁄ƒ£ƒ‚÷’∂À–Ë“™∞——’…´…Ë÷√≥…256…´
+"gitgutter
+
+" nmap [c <Plug>(GitGutterPrevHunk)
+" nmap ]c <Plug>(GitGutterNextHunk)
+
+" OmniCppComplete
+" let OmniCpp_NamespaceSearch = 1
+" let OmniCpp_GlobalScopeSearch = 1
+" let OmniCpp_ShowAccess = 1
+" let OmniCpp_ShowPrototypeInAbbr = 1 " show function parameters
+" let OmniCpp_MayCompleteDot = 1 " autocomplete after .
+" let OmniCpp_MayCompleteArrow = 1 " autocomplete after ->
+" let OmniCpp_MayCompleteScope = 1 " autocomplete after ::
+" let OmniCpp_DefaultNamespaces = ["std", "_GLIBCXX_STD"]
+" au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+" set completeopt=menuone,menu,longest,preview
+
 
 " vimgdb.vim
 if has("gdb")
@@ -393,4 +393,3 @@ if has("gdb")
 	let g:vimgdb_debug_file=""
 	run macros/gdb_mappings.vim
 endif
-
